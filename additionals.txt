@@ -1,0 +1,2 @@
+yarn add exprss cors mongoose dotenv
+yarn add -D @types/cors @types/express @types/node globals typescript @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint eslint-config-prettier eslint-plugin-unused-imports prettier typescript-eslint
