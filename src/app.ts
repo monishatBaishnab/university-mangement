@@ -1,7 +1,9 @@
-import express, { Request, Response } from 'express';
+import express, { NextFunction, Request, Response } from 'express';
 import cors from 'cors';
 import httpStatus from 'http-status';
 import userRoute from './app/modules/user/user.route';
+import globalErrorHandler from './app/middlewares/globalErrorHandler';
+import pathErrorHandler from './app/middlewares/pathErrorHandler';
 
 const app = express();
 
@@ -16,5 +18,9 @@ app.get('/', (req: Request, res: Response) => {
     message: 'Server is running smoothly.',
   });
 });
+
+app.use('*', pathErrorHandler)
+
+app.use(globalErrorHandler);
 
 export default app;

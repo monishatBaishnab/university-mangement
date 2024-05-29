@@ -18,7 +18,7 @@ const createUser = (req, res, next) => __awaiter(void 0, void 0, void 0, functio
         res.send(result);
     }
     catch (error) {
-        console.log(error);
+        next(error);
     }
 });
 exports.UserController = {

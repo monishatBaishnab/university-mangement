@@ -6,9 +6,9 @@ const createUser = async(req: Request, res: Response, next: NextFunction) => {
 
     try {
         const result = await UserServices.createUserIntoDB(password, studentData);
-        res.send(result)
+        res.send(result);
     } catch (error) {
-        console.log(error);
+        next(error);
     }
 }
 
