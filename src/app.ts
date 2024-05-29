@@ -1,26 +1,23 @@
-import express, { NextFunction, Request, Response } from 'express';
+import express from 'express';
 import cors from 'cors';
-import httpStatus from 'http-status';
-import userRoute from './app/modules/user/user.route';
 import globalErrorHandler from './app/middlewares/globalErrorHandler';
 import pathErrorHandler from './app/middlewares/pathErrorHandler';
+import router from './app/routes';
 
 const app = express();
 
+// Middleware to parse JSON requests
 app.use(express.json());
+// Middleware to enable CORS for handling cross-origin requests
 app.use(cors());
 
-app.use('/api/users/', userRoute);
+// Use the main router for handling all routes starting from '/'
+app.use('/', router);
 
-app.get('/', (req: Request, res: Response) => {
-  res.status(httpStatus.OK).json({
-    success: true,
-    message: 'Server is running smoothly.',
-  });
-});
+// Middleware to handle any undefined routes (i.e., catch-all for 404 errors)
+app.use('*', pathErrorHandler);
 
-app.use('*', pathErrorHandler)
-
+// Middleware to handle all global errors
 app.use(globalErrorHandler);
 
 export default app;
