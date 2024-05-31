@@ -21,7 +21,9 @@ const bootstrap = () => __awaiter(void 0, void 0, void 0, function* () {
         console.log(`Server is running on port: ${config_1.default.port}`);
     });
     try {
-        yield mongoose_1.default.connect(config_1.default.db_uri, { dbName: 'university-management' });
+        yield mongoose_1.default.connect(config_1.default.db_uri, {
+            dbName: 'university-management',
+        });
         console.log('Database connected successfully.');
     }
     catch (error) {

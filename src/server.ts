@@ -11,7 +11,9 @@ const bootstrap = async () => {
   });
 
   try {
-    await mongoose.connect(config.db_uri as string, {dbName: 'university-management'});
+    await mongoose.connect(config.db_uri as string, {
+      dbName: 'university-management',
+    });
     console.log('Database connected successfully.');
   } catch (error) {
     console.log(error);

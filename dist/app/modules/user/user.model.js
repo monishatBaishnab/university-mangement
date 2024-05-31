@@ -20,7 +20,11 @@ const userSchema = new mongoose_1.Schema({
     password: { type: String, required: true },
     needsPasswordChange: { type: Boolean, default: true },
     role: { type: String, enum: ['student', 'faculty', 'admin'] },
-    status: { type: String, enum: ['in-progress', 'blocked'], default: 'in-progress' },
+    status: {
+        type: String,
+        enum: ['in-progress', 'blocked'],
+        default: 'in-progress',
+    },
     isDeleted: { type: Boolean, default: false },
 }, { timestamps: true });
 userSchema.pre('save', function (next) {

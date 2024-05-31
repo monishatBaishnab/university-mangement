@@ -7,4 +7,4 @@ export type TUser = {
   isDeleted: boolean;
 };
 
-export type NewUser = Partial<TUser>
+export type NewUser = Partial<TUser>;

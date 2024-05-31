@@ -7,7 +7,7 @@ const http_status_1 = __importDefault(require("http-status"));
 const pathErrorHandler = (req, res) => {
     res.status(http_status_1.default.NOT_FOUND).json({
         success: false,
-        message: 'Route not found!'
+        message: 'Route not found!',
     });
 };
 exports.default = pathErrorHandler;
