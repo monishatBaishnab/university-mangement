@@ -24,5 +24,5 @@ exports.AcademicSemesterCode = ['01', '02', '03'];
 exports.academicSemesterNameCodeMapper = {
     Autumn: '01',
     Summer: '02',
-    Fall: '03'
+    Fall: '03',
 };

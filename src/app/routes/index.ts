@@ -16,7 +16,7 @@ const routes = [
     route: userRoute,
   },
   {
-    path: '/api/v1/create-academic-semester',
+    path: '/api/v1/academic-semesters',
     route: academicSemesterRoutes,
   },
 ];

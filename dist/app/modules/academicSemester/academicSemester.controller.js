@@ -24,9 +24,42 @@ const createAcademicSemester = (0, catchAsync_1.default)((req, res) => __awaiter
         statusCode: http_status_1.default.OK,
         success: true,
         message: 'Academic semester created successfully!',
-        data: result
+        data: result,
+    });
+}));
+const fetchAcademicSemesters = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield academicSemester_service_1.academicSemesterServices.fetchAcademicSemestersFromDB();
+    (0, sendResponse_1.default)(res, {
+        statusCode: http_status_1.default.OK,
+        success: true,
+        message: 'Academic semesters fetched successfully!',
+        data: result,
+    });
+}));
+const fetchAcademicSemester = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const semesterId = req.params.semesterId;
+    const result = yield academicSemester_service_1.academicSemesterServices.fetchAcademicSemesterFromDB(semesterId);
+    (0, sendResponse_1.default)(res, {
+        statusCode: http_status_1.default.OK,
+        success: true,
+        message: 'Academic semester fetched successfully!',
+        data: result,
+    });
+}));
+const updateAcademicSemester = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const semesterId = req.params.semesterId;
+    const academicSemesterData = req.body;
+    const result = yield academicSemester_service_1.academicSemesterServices.updateAcademicSemesterFromDB(semesterId, academicSemesterData);
+    (0, sendResponse_1.default)(res, {
+        statusCode: http_status_1.default.OK,
+        success: true,
+        message: 'Academic semester fetched successfully!',
+        data: result,
     });
 }));
 exports.academicSemesterControllers = {
     createAcademicSemester,
+    fetchAcademicSemesters,
+    fetchAcademicSemester,
+    updateAcademicSemester,
 };

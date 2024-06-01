@@ -31,7 +31,7 @@ academicSemesterSchema.pre('save', function (next) {
         const name = this.name;
         const isSemesterExists = yield AcademicSemesterModel.findOne({
             year: this.year,
-            name: this.name
+            name: this.name,
         });
         if (isSemesterExists) {
             throw new Error('Semester is already exists.');

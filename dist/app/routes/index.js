@@ -19,7 +19,7 @@ const routes = [
         route: user_route_1.default,
     },
     {
-        path: '/api/v1/create-academic-semester',
+        path: '/api/v1/academic-semesters',
         route: academicSemester_router_1.academicSemesterRoutes,
     },
 ];
