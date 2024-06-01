@@ -30,7 +30,7 @@ const createUserIntoDB = (password, payload) => __awaiter(void 0, void 0, void 0
         _id: payload.admissionSemester,
     });
     //set user id
-    userData.id = (0, use_utils_1.generateStudentId)(admissionSemester);
+    userData.id = yield (0, use_utils_1.generateStudentId)(admissionSemester);
     //create new user
     const res = yield user_model_1.default.create(userData);
     if (Object.keys(res).length) {
