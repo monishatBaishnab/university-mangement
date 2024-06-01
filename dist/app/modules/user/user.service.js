@@ -14,25 +14,29 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserServices = void 0;
 const config_1 = __importDefault(require("../../config"));
+const academicSemester_model_1 = __importDefault(require("../academicSemester/academicSemester.model"));
 const student_model_1 = require("../student/student.model");
+const use_utils_1 = require("./use.utils");
 const user_model_1 = __importDefault(require("./user.model"));
-const createUserIntoDB = (password, studentData) => __awaiter(void 0, void 0, void 0, function* () {
+const createUserIntoDB = (password, payload) => __awaiter(void 0, void 0, void 0, function* () {
     //create a user object
     const userData = {};
     //set use default password if password not given
     userData.password = password || config_1.default.default_password;
     //set use role
     userData.role = 'student';
-    //generate user id
-    const generateStudentId = (payload) => { };
+    // find academic semester info
+    const admissionSemester = yield academicSemester_model_1.default.findOne({
+        _id: payload.admissionSemester,
+    });
     //set user id
-    // userData.id = generateStudentId()
+    userData.id = (0, use_utils_1.generateStudentId)(admissionSemester);
     //create new user
     const res = yield user_model_1.default.create(userData);
     if (Object.keys(res).length) {
-        studentData.id = res.id;
-        studentData.user = res._id;
-        const newStudent = yield student_model_1.Student.create(studentData);
+        payload.id = res.id;
+        payload.user = res._id;
+        const newStudent = yield student_model_1.Student.create(payload);
         return newStudent;
     }
 });
