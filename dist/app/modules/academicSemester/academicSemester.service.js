@@ -13,9 +13,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.academicSemesterServices = void 0;
+const academicSemester_constant_1 = require("./academicSemester.constant");
 const academicSemester_model_1 = __importDefault(require("./academicSemester.model"));
-const createAcademicSemesterIntoDB = (academicSemesterData) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = academicSemester_model_1.default.create(academicSemesterData);
+const createAcademicSemesterIntoDB = (payload) => __awaiter(void 0, void 0, void 0, function* () {
+    if (academicSemester_constant_1.academicSemesterNameCodeMapper[payload.name] !== payload.code) {
+        throw new Error('Invalid semester code!');
+    }
+    const result = academicSemester_model_1.default.create(payload);
     return result;
 });
 exports.academicSemesterServices = {
