@@ -10,19 +10,19 @@ router.get('/', academicFacultyControllers.getAllAcademicFaculty);
 router.get('/:id', academicFacultyControllers.getSingleAcademicFaculty);
 
 router.post(
-    '/',
-    validateRequest(
-        AcademicFacultyValidations.createAcademicFacultyValidationSchema,
-    ),
-    academicFacultyControllers.createAcademicFaculty,
+  '/',
+  validateRequest(
+    AcademicFacultyValidations.createAcademicFacultyValidationSchema,
+  ),
+  academicFacultyControllers.createAcademicFaculty,
 );
 
 router.patch(
-    '/:id',
-    validateRequest(
-        AcademicFacultyValidations.updateAcademicFacultyValidationSchema,
-    ),
-    academicFacultyControllers.updateAcademicFaculty
+  '/:id',
+  validateRequest(
+    AcademicFacultyValidations.updateAcademicFacultyValidationSchema,
+  ),
+  academicFacultyControllers.updateAcademicFaculty,
 );
 
 export const academicFacultyRoutes = router;

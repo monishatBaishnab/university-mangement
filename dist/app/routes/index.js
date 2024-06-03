@@ -8,6 +8,7 @@ const user_route_1 = __importDefault(require("../modules/user/user.route"));
 const status_1 = __importDefault(require("../modules/status/status"));
 const academicSemester_router_1 = require("../modules/academicSemester/academicSemester.router");
 const academicFaculty_route_1 = require("../modules/academicFaculty/academicFaculty.route");
+const academicDepartment_route_1 = require("../modules/academicDepartment/academicDepartment.route");
 const router = (0, express_1.Router)();
 // Define an array of route configurations
 const routes = [
@@ -22,6 +23,10 @@ const routes = [
     {
         path: '/academic-faculties',
         route: academicFaculty_route_1.academicFacultyRoutes,
+    },
+    {
+        path: '/academic-departments',
+        route: academicDepartment_route_1.academicDepartmentRoutes,
     },
 ];
 // Use the statusRouter for all routes for check server status

@@ -12,54 +12,54 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.academicFacultyControllers = void 0;
+exports.academicDepartmentControllers = void 0;
 const http_status_1 = __importDefault(require("http-status"));
 const catchAsync_1 = __importDefault(require("../../utils/catchAsync"));
 const sendResponse_1 = __importDefault(require("../../utils/sendResponse"));
-const academicFaculty_service_1 = require("./academicFaculty.service");
-const getAllAcademicFaculty = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield academicFaculty_service_1.academicFacultyServices.fetchAllAcademicFacultyFromDB();
+const academicDepartment_service_1 = require("./academicDepartment.service");
+const fetchAllAcademicDepartment = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield academicDepartment_service_1.academicDepartmentServices.fetchAllAcademicDepartmentFromDB();
     (0, sendResponse_1.default)(res, {
         statusCode: http_status_1.default.OK,
         success: true,
-        message: 'Academic faculties fetched successfully!',
+        message: 'Academic departments fetched successfully!',
         data: result,
     });
 }));
-const getSingleAcademicFaculty = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const fetchSingleAcademicDepartment = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const id = req.params.id;
-    const result = yield academicFaculty_service_1.academicFacultyServices.fetchSingleAcademicFacultyFromDB(id);
+    const result = yield academicDepartment_service_1.academicDepartmentServices.fetchSingleAcademicDepartmentFromDB(id);
     (0, sendResponse_1.default)(res, {
         statusCode: http_status_1.default.OK,
         success: true,
-        message: 'Academic faculty fetched successfully!',
+        message: 'Academic department fetched successfully!',
         data: result,
     });
 }));
-const createAcademicFaculty = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const academicFacultyData = req.body;
-    const result = yield academicFaculty_service_1.academicFacultyServices.createAcademicFacultyIntoDB(academicFacultyData);
+const createAcademicDepartment = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const academicDepartmentData = req.body;
+    const result = yield academicDepartment_service_1.academicDepartmentServices.createAcademicDepartmentIntoDB(academicDepartmentData);
     (0, sendResponse_1.default)(res, {
         statusCode: http_status_1.default.OK,
         success: true,
-        message: 'Academic faculty created successfully!',
+        message: 'Academic department created successfully!',
         data: result,
     });
 }));
-const updateAcademicFaculty = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const updateAcademicDepartment = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const id = req.params.id;
-    const academicFacultyData = req.body;
-    const result = yield academicFaculty_service_1.academicFacultyServices.updateAcademicFacultyIntoDB(id, academicFacultyData);
+    const academicDepartmentData = req.body;
+    const result = yield academicDepartment_service_1.academicDepartmentServices.updateAcademicDepartmentFromDB(id, academicDepartmentData);
     (0, sendResponse_1.default)(res, {
         statusCode: http_status_1.default.OK,
         success: true,
-        message: 'Academic faculty updated successfully!',
+        message: 'Academic departments updated successfully!',
         data: result,
     });
 }));
-exports.academicFacultyControllers = {
-    getAllAcademicFaculty,
-    getSingleAcademicFaculty,
-    createAcademicFaculty,
-    updateAcademicFaculty,
+exports.academicDepartmentControllers = {
+    fetchAllAcademicDepartment,
+    fetchSingleAcademicDepartment,
+    createAcademicDepartment,
+    updateAcademicDepartment,
 };

@@ -30,14 +30,12 @@ const userSchema = new mongoose_1.Schema({
 userSchema.pre('save', function (next) {
     return __awaiter(this, void 0, void 0, function* () {
         const user = this;
-        console.log(user);
         user.password = yield bcrypt_1.default.hash(user.password, Number(config_1.default.bcrypt_salt_rounds));
         next();
     });
 });
 userSchema.post('save', function (doc, next) {
     doc.password = '';
-    console.log(doc);
     next();
 });
 const UserModel = (0, mongoose_1.model)('User', userSchema);
