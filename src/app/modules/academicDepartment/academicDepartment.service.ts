@@ -2,11 +2,11 @@ import { TAcademicDepartment } from './academicDepartment.interface';
 import AcademicDepartmentModel from './academicDepartment.model';
 
 const fetchAllAcademicDepartmentFromDB = async () => {
-  return await AcademicDepartmentModel.find().populate('academicFaculty');
+  return await AcademicDepartmentModel.find();
 };
 
 const fetchSingleAcademicDepartmentFromDB = async (id: string) => {
-  return await AcademicDepartmentModel.findOne({ _id: id });
+  return await AcademicDepartmentModel.findOne({ _id: id }).populate('academicFaculty');
 };
 
 const createAcademicDepartmentIntoDB = async (payload: TAcademicDepartment) => {

@@ -10,7 +10,7 @@ const validateRequest_1 = __importDefault(require("../../middlewares/validateReq
 const academicDepartment_validation_1 = require("./academicDepartment.validation");
 const router = (0, express_1.Router)();
 router.get('/', academicDepartment_controller_1.academicDepartmentControllers.fetchAllAcademicDepartment);
-router.get('/:id', (0, validateRequest_1.default)(academicDepartment_validation_1.AcademicDepartmentValidations.createAcademicDepartmentValidationSchema), academicDepartment_controller_1.academicDepartmentControllers.fetchSingleAcademicDepartment);
-router.post('/', academicDepartment_controller_1.academicDepartmentControllers.createAcademicDepartment);
+router.get('/:id', academicDepartment_controller_1.academicDepartmentControllers.fetchSingleAcademicDepartment);
+router.post('/', (0, validateRequest_1.default)(academicDepartment_validation_1.AcademicDepartmentValidations.createAcademicDepartmentValidationSchema), academicDepartment_controller_1.academicDepartmentControllers.createAcademicDepartment);
 router.patch('/:id', (0, validateRequest_1.default)(academicDepartment_validation_1.AcademicDepartmentValidations.updateAcademicDepartmentValidationSchema), academicDepartment_controller_1.academicDepartmentControllers.updateAcademicDepartment);
 exports.academicDepartmentRoutes = router;

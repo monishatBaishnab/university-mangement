@@ -15,10 +15,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.academicDepartmentServices = void 0;
 const academicDepartment_model_1 = __importDefault(require("./academicDepartment.model"));
 const fetchAllAcademicDepartmentFromDB = () => __awaiter(void 0, void 0, void 0, function* () {
-    return yield academicDepartment_model_1.default.find().populate('academicFaculty');
+    return yield academicDepartment_model_1.default.find();
 });
 const fetchSingleAcademicDepartmentFromDB = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    return yield academicDepartment_model_1.default.findOne({ _id: id });
+    return yield academicDepartment_model_1.default.findOne({ _id: id }).populate('academicFaculty');
 });
 const createAcademicDepartmentIntoDB = (payload) => __awaiter(void 0, void 0, void 0, function* () {
     return yield academicDepartment_model_1.default.create(payload);

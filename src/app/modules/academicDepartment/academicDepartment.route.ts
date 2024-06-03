@@ -7,15 +7,15 @@ const router = Router();
 
 router.get('/', academicDepartmentControllers.fetchAllAcademicDepartment);
 
-router.get(
-  '/:id',
+router.get('/:id', academicDepartmentControllers.fetchSingleAcademicDepartment);
+
+router.post(
+  '/',
   validateRequest(
     AcademicDepartmentValidations.createAcademicDepartmentValidationSchema,
   ),
-  academicDepartmentControllers.fetchSingleAcademicDepartment,
+  academicDepartmentControllers.createAcademicDepartment,
 );
-
-router.post('/', academicDepartmentControllers.createAcademicDepartment);
 
 router.patch(
   '/:id',
