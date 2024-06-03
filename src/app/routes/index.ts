@@ -2,24 +2,28 @@ import { Router } from 'express';
 import userRoute from '../modules/user/user.route';
 import statusRouter from '../modules/status/status';
 import { academicSemesterRoutes } from '../modules/academicSemester/academicSemester.router';
+import { academicFacultyRoutes } from '../modules/academicFaculty/academicFaculty.route';
 
 const router = Router();
 
 // Define an array of route configurations
 const routes = [
   {
-    path: '/',
-    route: statusRouter,
-  },
-  {
-    path: '/api/v1/users',
+    path: '/users',
     route: userRoute,
   },
   {
-    path: '/api/v1/academic-semesters',
+    path: '/academic-semesters',
     route: academicSemesterRoutes,
   },
+  {
+    path: '/academic-faculties',
+    route: academicFacultyRoutes,
+  },
 ];
+
+// Use the statusRouter for all routes for check server status
+router.use('/', statusRouter);
 
 // Loop through each route configuration in the routes array
 routes.forEach(({ path, route }) =>

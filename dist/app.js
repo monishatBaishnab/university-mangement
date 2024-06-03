@@ -14,7 +14,7 @@ app.use(express_1.default.json());
 // Middleware to enable CORS for handling cross-origin requests
 app.use((0, cors_1.default)());
 // Use the main router for handling all routes starting from '/'
-app.use('/', routes_1.default);
+app.use('/api/v1/', routes_1.default);
 // Middleware to handle any undefined routes (i.e., catch-all for 404 errors)
 app.use('*', pathErrorHandler_1.default);
 // Middleware to handle all global errors
