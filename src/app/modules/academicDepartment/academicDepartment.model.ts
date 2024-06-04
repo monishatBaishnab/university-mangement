@@ -1,6 +1,7 @@
 import { Schema, model } from 'mongoose';
 import { TAcademicDepartment } from './academicDepartment.interface';
 import AcademicFacultyModel from '../academicFaculty/academicFaculty.model';
+import { AppError } from '../../errors/AppError';
 
 const academicDepartmentSchema = new Schema<TAcademicDepartment>(
   {
@@ -18,6 +19,7 @@ academicDepartmentSchema.pre('save', async function (next) {
   const isAcademicFacultyExists = await AcademicFacultyModel.findOne({
     _id: this.academicFaculty,
   });
+  
   const isAcademicDepartmentExists = await AcademicDepartmentModel.findOne({
     name: this.name,
   });
@@ -34,13 +36,15 @@ academicDepartmentSchema.pre('save', async function (next) {
   next();
 });
 
+
+
 academicDepartmentSchema.pre('findOneAndUpdate', async function (next) {
   const query = this.getQuery();
 
   const isExistsDepartment = await AcademicDepartmentModel.findOne(query);
 
   if (!isExistsDepartment) {
-    throw new Error("Department does not exist!");
+    throw new AppError(404, "Department does not exist!");
   }
 
   next();

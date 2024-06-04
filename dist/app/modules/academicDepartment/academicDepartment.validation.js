@@ -5,13 +5,13 @@ const zod_1 = require("zod");
 const createAcademicDepartmentValidationSchema = zod_1.z.object({
     body: zod_1.z.object({
         name: zod_1.z.string().min(1),
-        academicDepartment: zod_1.z.string().min(24),
+        academicFaculty: zod_1.z.string().min(24),
     }),
 });
 const updateAcademicDepartmentValidationSchema = zod_1.z.object({
     body: zod_1.z.object({
         name: zod_1.z.string().min(1).optional(),
-        academicDepartment: zod_1.z.string().min(24).optional(),
+        academicFaculty: zod_1.z.string().min(24).optional(),
     }),
 });
 exports.AcademicDepartmentValidations = {

@@ -5,6 +5,7 @@ import {
   AcademicSemesterName,
   Months,
 } from './academicSemester.constant';
+import { AppError } from '../../errors/AppError';
 
 const academicSemesterSchema = new Schema<TAcademicSemester>({
   name: { type: String, enum: AcademicSemesterName, required: true },
@@ -35,6 +36,18 @@ academicSemesterSchema.pre('save', async function (next) {
 
   next();
 });
+
+academicSemesterSchema.pre('findOneAndUpdate', async function (next) {
+  const query = this.getQuery();
+
+  const isExists = await AcademicSemesterModel.findOne(query);
+
+  if (!isExists) {
+    throw new AppError(404, "Semester does not exist!");
+  }
+
+  next();
+})
 
 const AcademicSemesterModel = model<TAcademicSemester>(
   'AcademicSemester',

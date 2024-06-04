@@ -14,6 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = require("mongoose");
 const academicFaculty_model_1 = __importDefault(require("../academicFaculty/academicFaculty.model"));
+const AppError_1 = require("../../errors/AppError");
 const academicDepartmentSchema = new mongoose_1.Schema({
     name: { type: String, required: true, unique: true },
     academicFaculty: {
@@ -44,7 +45,7 @@ academicDepartmentSchema.pre('findOneAndUpdate', function (next) {
         const query = this.getQuery();
         const isExistsDepartment = yield AcademicDepartmentModel.findOne(query);
         if (!isExistsDepartment) {
-            throw new Error("Department does not exist!");
+            throw new AppError_1.AppError(404, "Department does not exist!");
         }
         next();
     });
