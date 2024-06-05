@@ -4,6 +4,7 @@ import statusRouter from '../modules/status/status';
 import { academicSemesterRoutes } from '../modules/academicSemester/academicSemester.router';
 import { academicFacultyRoutes } from '../modules/academicFaculty/academicFaculty.route';
 import { academicDepartmentRoutes } from '../modules/academicDepartment/academicDepartment.route';
+import { studentRoutes } from '../modules/student/student.route';
 
 const router = Router();
 
@@ -12,6 +13,9 @@ const routes = [
   {
     path: '/users',
     route: userRoute,
+  },{
+    path: '/students',
+    route: studentRoutes,
   },
   {
     path: '/academic-semesters',

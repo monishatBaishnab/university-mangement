@@ -9,12 +9,16 @@ const status_1 = __importDefault(require("../modules/status/status"));
 const academicSemester_router_1 = require("../modules/academicSemester/academicSemester.router");
 const academicFaculty_route_1 = require("../modules/academicFaculty/academicFaculty.route");
 const academicDepartment_route_1 = require("../modules/academicDepartment/academicDepartment.route");
+const student_route_1 = require("../modules/student/student.route");
 const router = (0, express_1.Router)();
 // Define an array of route configurations
 const routes = [
     {
         path: '/users',
         route: user_route_1.default,
+    }, {
+        path: '/students',
+        route: student_route_1.studentRoutes,
     },
     {
         path: '/academic-semesters',
