@@ -45,7 +45,7 @@ academicDepartmentSchema.pre('findOneAndUpdate', function (next) {
         const query = this.getQuery();
         const isExistsDepartment = yield AcademicDepartmentModel.findOne(query);
         if (!isExistsDepartment) {
-            throw new AppError_1.AppError(404, "Department does not exist!");
+            throw new AppError_1.AppError(404, 'Department does not exist!');
         }
         next();
     });

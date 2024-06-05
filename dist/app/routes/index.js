@@ -16,7 +16,8 @@ const routes = [
     {
         path: '/users',
         route: user_route_1.default,
-    }, {
+    },
+    {
         path: '/students',
         route: student_route_1.studentRoutes,
     },

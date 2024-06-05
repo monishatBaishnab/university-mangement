@@ -33,5 +33,5 @@ const deleteStudentFromDB = (id) => __awaiter(void 0, void 0, void 0, function* 
     }
 });
 exports.studentServices = {
-    deleteStudentFromDB
+    deleteStudentFromDB,
 };

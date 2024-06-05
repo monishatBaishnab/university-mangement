@@ -45,7 +45,7 @@ academicSemesterSchema.pre('findOneAndUpdate', function (next) {
         const query = this.getQuery();
         const isExists = yield AcademicSemesterModel.findOne(query);
         if (!isExists) {
-            throw new AppError_1.AppError(404, "Semester does not exist!");
+            throw new AppError_1.AppError(404, 'Semester does not exist!');
         }
         next();
     });

@@ -27,22 +27,24 @@ const createUserIntoDB = async (password: string, payload: TStudent) => {
     session.startTransaction();
 
     //set user id
-    userData.id = await generateStudentId(admissionSemester as TAcademicSemester);
+    userData.id = await generateStudentId(
+      admissionSemester as TAcademicSemester,
+    );
 
     //create new user
     const newUser = await UserModel.create([userData], { session });
     if (!newUser.length) {
-      throw new Error('Failed to create user!')
+      throw new Error('Failed to create user!');
     }
     payload.id = newUser[0].id;
     payload.user = newUser[0]._id;
 
     const newStudent = await Student.create([payload], { session });
     if (!newStudent.length) {
-      throw new Error('Failed to create student!')
+      throw new Error('Failed to create student!');
     }
 
-    await session.commitTransaction()
+    await session.commitTransaction();
     await session.endSession();
     return newStudent;
   } catch (error) {

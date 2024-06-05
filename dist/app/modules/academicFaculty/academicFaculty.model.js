@@ -20,7 +20,7 @@ academicFacultySchema.pre('findOneAndUpdate', function (next) {
         const query = this.getQuery();
         const isExistsFaculty = yield AcademicFacultyModel.findOne(query);
         if (!isExistsFaculty) {
-            throw new AppError_1.AppError(404, "Faculty does not exist!");
+            throw new AppError_1.AppError(404, 'Faculty does not exist!');
         }
         next();
     });

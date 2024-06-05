@@ -6,7 +6,9 @@ const fetchAllAcademicDepartmentFromDB = async () => {
 };
 
 const fetchSingleAcademicDepartmentFromDB = async (id: string) => {
-  return await AcademicDepartmentModel.findOne({ _id: id }).populate('academicFaculty');
+  return await AcademicDepartmentModel.findOne({ _id: id }).populate(
+    'academicFaculty',
+  );
 };
 
 const createAcademicDepartmentIntoDB = async (payload: TAcademicDepartment) => {

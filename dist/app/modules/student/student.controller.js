@@ -24,9 +24,9 @@ const deleteStudent = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, 
         statusCode: http_status_1.default.OK,
         success: true,
         message: 'Student deleted successfully.',
-        data: result
+        data: result,
     });
 }));
 exports.studentControllers = {
-    deleteStudent
+    deleteStudent,
 };

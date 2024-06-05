@@ -13,7 +13,8 @@ const routes = [
   {
     path: '/users',
     route: userRoute,
-  },{
+  },
+  {
     path: '/students',
     route: studentRoutes,
   },

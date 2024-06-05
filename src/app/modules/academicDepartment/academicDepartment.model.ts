@@ -19,11 +19,10 @@ academicDepartmentSchema.pre('save', async function (next) {
   const isAcademicFacultyExists = await AcademicFacultyModel.findOne({
     _id: this.academicFaculty,
   });
-  
+
   const isAcademicDepartmentExists = await AcademicDepartmentModel.findOne({
     name: this.name,
   });
-
 
   if (!isAcademicFacultyExists) {
     throw new Error('Academic Faculty not found!');
@@ -36,19 +35,17 @@ academicDepartmentSchema.pre('save', async function (next) {
   next();
 });
 
-
-
 academicDepartmentSchema.pre('findOneAndUpdate', async function (next) {
   const query = this.getQuery();
 
   const isExistsDepartment = await AcademicDepartmentModel.findOne(query);
 
   if (!isExistsDepartment) {
-    throw new AppError(404, "Department does not exist!");
+    throw new AppError(404, 'Department does not exist!');
   }
 
   next();
-})
+});
 
 const AcademicDepartmentModel = model<TAcademicDepartment>(
   'AcademicDepartment',

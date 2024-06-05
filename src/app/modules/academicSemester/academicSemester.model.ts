@@ -43,11 +43,11 @@ academicSemesterSchema.pre('findOneAndUpdate', async function (next) {
   const isExists = await AcademicSemesterModel.findOne(query);
 
   if (!isExists) {
-    throw new AppError(404, "Semester does not exist!");
+    throw new AppError(404, 'Semester does not exist!');
   }
 
   next();
-})
+});
 
 const AcademicSemesterModel = model<TAcademicSemester>(
   'AcademicSemester',

@@ -20,11 +20,10 @@ academicFacultySchema.pre('findOneAndUpdate', async function (next) {
   const isExistsFaculty = await AcademicFacultyModel.findOne(query);
 
   if (!isExistsFaculty) {
-    throw new AppError(404, "Faculty does not exist!");
+    throw new AppError(404, 'Faculty does not exist!');
   }
 
   next();
-})
-
+});
 
 export default AcademicFacultyModel;
