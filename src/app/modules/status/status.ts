@@ -4,6 +4,7 @@ import httpStatus from 'http-status';
 const statusRouter = Router();
 
 statusRouter.get('/', (req: Request, res: Response) => {
+  // Promise.reject()
   res.status(httpStatus.OK).json({
     success: true,
     message: 'Server is running smoothly.',

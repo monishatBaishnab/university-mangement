@@ -1,6 +1,6 @@
 import httpStatus from 'http-status';
 import { ZodError, ZodIssue, string } from 'zod';
-import { TErrorSources, TGenericErrorResponse } from '../interface/errors';
+import { TGenericErrorResponse } from '../interface/errors';
 
 const handleZodError = (err: ZodError): TGenericErrorResponse => {
     const message = 'Validation error!';

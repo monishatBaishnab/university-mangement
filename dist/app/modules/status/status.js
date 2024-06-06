@@ -7,6 +7,7 @@ const express_1 = require("express");
 const http_status_1 = __importDefault(require("http-status"));
 const statusRouter = (0, express_1.Router)();
 statusRouter.get('/', (req, res) => {
+    // Promise.reject()
     res.status(http_status_1.default.OK).json({
         success: true,
         message: 'Server is running smoothly.',
