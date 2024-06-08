@@ -14,7 +14,6 @@ app.use(cors());
 // Use the main router for handling all routes starting from '/'
 app.use('/api/v1/', router);
 
-
 // Middleware to handle any undefined routes (i.e., catch-all for 404 errors)
 app.use('*', pathErrorHandler);
 

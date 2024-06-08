@@ -16,6 +16,33 @@ exports.studentServices = void 0;
 const mongoose_1 = __importDefault(require("mongoose"));
 const user_model_1 = __importDefault(require("../user/user.model"));
 const student_model_1 = require("./student.model");
+const fetchAllStudentFromDB = (query) => __awaiter(void 0, void 0, void 0, function* () {
+    const queryObj = Object.assign({}, query);
+    let searchTerm = '';
+    const searchFields = ['name.firstName', 'email', 'permanentAddress', 'id'];
+    if (query === null || query === void 0 ? void 0 : query.searchTerm) {
+        searchTerm = query === null || query === void 0 ? void 0 : query.searchTerm;
+    }
+    const excludeFiles = ['searchTerm'];
+    excludeFiles === null || excludeFiles === void 0 ? void 0 : excludeFiles.forEach(el => delete queryObj[el]);
+    const searchQuery = student_model_1.Student.find({
+        $or: searchFields.map((field) => ({
+            [field]: { $regex: searchTerm, $options: 'i' }
+        }))
+    })
+        .populate('admissionSemester')
+        .populate({
+        path: 'academicDepartment',
+        select: 'name academicFaculty -_id',
+        populate: { path: 'academicFaculty', select: 'name -_id' },
+    });
+    const filterQuery = searchQuery.find(queryObj);
+    const result = yield filterQuery.find();
+    if ((result === null || result === void 0 ? void 0 : result.length) < 1) {
+        throw new Error('No data found.');
+    }
+    return result;
+});
 const deleteStudentFromDB = (id) => __awaiter(void 0, void 0, void 0, function* () {
     const session = yield mongoose_1.default.startSession();
     try {
@@ -33,5 +60,6 @@ const deleteStudentFromDB = (id) => __awaiter(void 0, void 0, void 0, function* 
     }
 });
 exports.studentServices = {
+    fetchAllStudentFromDB,
     deleteStudentFromDB,
 };

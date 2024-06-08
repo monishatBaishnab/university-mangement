@@ -37,30 +37,34 @@ const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
     message = simplifiedError.message;
     errorSources = simplifiedError.errorSources;
     statusCode = simplifiedError.statusCode;
-  }else if (err.code === 11000) {
+  } else if (err.code === 11000) {
     const simplifiedError = handleDuplicateError(err);
 
     message = simplifiedError.message;
     errorSources = simplifiedError.errorSources;
     statusCode = simplifiedError.statusCode;
-  }else if (err.code === 11000) {
+  } else if (err.code === 11000) {
     const simplifiedError = handleDuplicateError(err);
 
     message = simplifiedError.message;
     errorSources = simplifiedError.errorSources;
     statusCode = simplifiedError.statusCode;
-  }else if (err instanceof AppError) {
+  } else if (err instanceof AppError) {
     message = err.message;
-    errorSources = [{
-      path: '',
-      message: err.message
-    }]
-  }else if (err instanceof Error) {
+    errorSources = [
+      {
+        path: '',
+        message: err.message,
+      },
+    ];
+  } else if (err instanceof Error) {
     message = err.message;
-    errorSources = [{
-      path: '',
-      message: err.message
-    }]
+    errorSources = [
+      {
+        path: '',
+        message: err.message,
+      },
+    ];
   }
 
   res.status(statusCode).json({

@@ -23,16 +23,18 @@ const bootstrap = async () => {
 bootstrap();
 
 process.on('unhandledRejection', () => {
-  console.log('😈 unhandledRejection is detected, shutting down the server....');
-  if(server){
+  console.log(
+    '😈 unhandledRejection is detected, shutting down the server....',
+  );
+  if (server) {
     server.close(() => {
       process.exit(1);
-    })
+    });
   }
   process.exit(1);
-})
+});
 
 process.on('uncaughtException', () => {
   console.log('😈 uncaughtException is detected, shutting down the server....');
   process.exit(1);
-})
+});

@@ -17,6 +17,15 @@ const http_status_1 = __importDefault(require("http-status"));
 const catchAsync_1 = __importDefault(require("../../utils/catchAsync"));
 const sendResponse_1 = __importDefault(require("../../utils/sendResponse"));
 const student_service_1 = require("./student.service");
+const fetchAllStudent = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield student_service_1.studentServices.fetchAllStudentFromDB(req.query);
+    (0, sendResponse_1.default)(res, {
+        statusCode: http_status_1.default.OK,
+        success: true,
+        message: 'Students fetched successfully.',
+        data: result,
+    });
+}));
 const deleteStudent = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const id = req.params.id;
     const result = yield student_service_1.studentServices.deleteStudentFromDB(id);
@@ -28,5 +37,6 @@ const deleteStudent = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, 
     });
 }));
 exports.studentControllers = {
+    fetchAllStudent,
     deleteStudent,
 };
