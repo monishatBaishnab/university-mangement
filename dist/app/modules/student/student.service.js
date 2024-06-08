@@ -17,13 +17,14 @@ const mongoose_1 = __importDefault(require("mongoose"));
 const user_model_1 = __importDefault(require("../user/user.model"));
 const student_model_1 = require("./student.model");
 const fetchAllStudentFromDB = (query) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a;
     const queryObj = Object.assign({}, query);
     let searchTerm = '';
     const searchFields = ['name.firstName', 'email', 'permanentAddress', 'id'];
     if (query === null || query === void 0 ? void 0 : query.searchTerm) {
         searchTerm = query === null || query === void 0 ? void 0 : query.searchTerm;
     }
-    const excludeFiles = ['searchTerm'];
+    const excludeFiles = ['searchTerm', 'sort', 'limit', 'page', 'fields'];
     excludeFiles === null || excludeFiles === void 0 ? void 0 : excludeFiles.forEach(el => delete queryObj[el]);
     const searchQuery = student_model_1.Student.find({
         $or: searchFields.map((field) => ({
@@ -37,7 +38,29 @@ const fetchAllStudentFromDB = (query) => __awaiter(void 0, void 0, void 0, funct
         populate: { path: 'academicFaculty', select: 'name -_id' },
     });
     const filterQuery = searchQuery.find(queryObj);
-    const result = yield filterQuery.find();
+    let sort = '-createdAt';
+    if (query === null || query === void 0 ? void 0 : query.sort) {
+        sort = query === null || query === void 0 ? void 0 : query.sort;
+    }
+    const sortQuery = filterQuery.sort(sort);
+    let limit = 0;
+    let page = 0;
+    let skip = 0;
+    if (query === null || query === void 0 ? void 0 : query.limit) {
+        limit = query === null || query === void 0 ? void 0 : query.limit;
+    }
+    if (query === null || query === void 0 ? void 0 : query.page) {
+        page = query === null || query === void 0 ? void 0 : query.page;
+        skip = (page - 1) * limit;
+    }
+    const pageQuery = sortQuery.skip(skip);
+    const limitQuery = pageQuery.limit(limit);
+    let fields = '-__v';
+    if (query === null || query === void 0 ? void 0 : query.fields) {
+        fields = (_a = query === null || query === void 0 ? void 0 : query.fields) === null || _a === void 0 ? void 0 : _a.split(',').join(' ');
+    }
+    const fieldQuery = limitQuery.select(fields);
+    const result = yield fieldQuery.find();
     if ((result === null || result === void 0 ? void 0 : result.length) < 1) {
         throw new Error('No data found.');
     }
