@@ -22,6 +22,10 @@ const routes = [
         route: student_route_1.studentRoutes,
     },
     {
+        path: '/faculty',
+        route: student_route_1.studentRoutes,
+    },
+    {
         path: '/academic-semesters',
         route: academicSemester_router_1.academicSemesterRoutes,
     },

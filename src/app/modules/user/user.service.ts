@@ -4,11 +4,14 @@ import { TAcademicSemester } from '../academicSemester/academicSemester.interfac
 import AcademicSemesterModel from '../academicSemester/academicSemester.model';
 import { TStudent } from '../student/student.interface';
 import { Student } from '../student/student.model';
-import { generateStudentId } from './use.utils';
+import { generateFacultiesId, generateStudentId } from './use.utils';
 import { NewUser, TUser } from './user.interface';
 import UserModel from './user.model';
 import { AppError } from '../../errors/AppError';
 import httpStatus from 'http-status';
+import { TFaculty } from '../faculty/faculty.interface';
+import AcademicFacultyModel from '../academicFaculty/academicFaculty.model';
+import FacultyModel from '../faculty/faculty.model';
 
 const createUserIntoDB = async (password: string, payload: TStudent) => {
   //create a user object
@@ -54,6 +57,45 @@ const createUserIntoDB = async (password: string, payload: TStudent) => {
   }
 };
 
+const createFacultyIntoDB = async (password: string, payload: TFaculty) => {
+  //create a user object
+  const userData: NewUser = {};
+  //set use default password if password not given
+  userData.password = password || config.default_password;
+  
+  //set use role
+  userData.role = 'faculty';
+  
+  const session = await mongoose.startSession();
+  try {
+    session.startTransaction();
+
+    //set user id
+    userData.id = await generateFacultiesId();
+
+    //create new user
+    const newUser = await UserModel.create([userData], { session });
+    if (!newUser.length) {
+      throw new Error('Failed to create user!');
+    }
+    payload.id = newUser[0].id;
+
+    const newFaculty = await FacultyModel.create([payload], { session });
+    if (!newFaculty.length) {
+      throw new Error('Failed to create faculty!');
+    }
+
+    await session.commitTransaction();
+    await session.endSession();
+    return newFaculty;
+  } catch (error) {
+    await session.abortTransaction();
+    await session.endSession();
+    throw new AppError(httpStatus.BAD_REQUEST, error as string);
+  }
+};
+
 export const UserServices = {
   createUserIntoDB,
+  createFacultyIntoDB
 };

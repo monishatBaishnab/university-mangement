@@ -21,6 +21,7 @@ const use_utils_1 = require("./use.utils");
 const user_model_1 = __importDefault(require("./user.model"));
 const AppError_1 = require("../../errors/AppError");
 const http_status_1 = __importDefault(require("http-status"));
+const faculty_model_1 = __importDefault(require("../faculty/faculty.model"));
 const createUserIntoDB = (password, payload) => __awaiter(void 0, void 0, void 0, function* () {
     //create a user object
     const userData = {};
@@ -58,6 +59,39 @@ const createUserIntoDB = (password, payload) => __awaiter(void 0, void 0, void 0
         throw new AppError_1.AppError(http_status_1.default.BAD_REQUEST, error);
     }
 });
+const createFacultyIntoDB = (password, payload) => __awaiter(void 0, void 0, void 0, function* () {
+    //create a user object
+    const userData = {};
+    //set use default password if password not given
+    userData.password = password || config_1.default.default_password;
+    //set use role
+    userData.role = 'faculty';
+    const session = yield mongoose_1.default.startSession();
+    try {
+        session.startTransaction();
+        //set user id
+        userData.id = yield (0, use_utils_1.generateFacultiesId)();
+        //create new user
+        const newUser = yield user_model_1.default.create([userData], { session });
+        if (!newUser.length) {
+            throw new Error('Failed to create user!');
+        }
+        payload.id = newUser[0].id;
+        const newFaculty = yield faculty_model_1.default.create([payload], { session });
+        if (!newFaculty.length) {
+            throw new Error('Failed to create faculty!');
+        }
+        yield session.commitTransaction();
+        yield session.endSession();
+        return newFaculty;
+    }
+    catch (error) {
+        yield session.abortTransaction();
+        yield session.endSession();
+        throw new AppError_1.AppError(http_status_1.default.BAD_REQUEST, error);
+    }
+});
 exports.UserServices = {
     createUserIntoDB,
+    createFacultyIntoDB
 };
